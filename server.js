@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 const fs = require('fs-extra');
 const path = require('path');
-const DocumentationCoverage = require('../src/DocCoverage/index');
+const DocumentationCoverage = require('./lib/index');
 
 class DocumentationCoverageCli {
   /**
