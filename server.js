@@ -20,7 +20,7 @@ const defaultConfig = {
   ],
   excludedComponentPaths: ['/__test__/'],
   foldersWithComponentFiles: ['components', 'containers'],
-  // storiesFolderPath: './stories',
+  storiesFolderPath: './stories',
 };
 
 
