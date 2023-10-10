@@ -1,7 +1,31 @@
-#! /usr/bin/env node
-const fs = require('fs-extra');
+#!/usr/bin/env node
+
 const path = require('path');
+
+const deepmerge = require('@fastify/deepmerge')
+const fs = require('fs-extra');
+
 const DocumentationCoverage = require('./lib/index');
+
+
+const defaultConfig = {
+  source: './lib', // './src',
+  excludedPaths: [
+    '/assets/',
+    '/components/',
+    '/containers/',
+    '/__test__/',
+    '/config./',
+    '__snapshots__',
+  ],
+  excludedComponentPaths: ['/__test__/'],
+  foldersWithComponentFiles: ['components', 'containers'],
+  // storiesFolderPath: './stories',
+};
+
+
+const merge = deepmerge()
+
 
 class DocumentationCoverageCli {
   /**
@@ -52,25 +76,10 @@ class DocumentationCoverageCli {
     if (configPath) {
       config = this.createConfigFromJSONFile(configPath);
     }
-    if (config) {
-      DocumentationCoverage.generateReport(config);
-    } else {
-      const defaultConfig = {
-        source: './src',
-        excludedPaths: [
-          '/assets/',
-          '/components/',
-          '/containers/',
-          '/__test__/',
-          '/config./',
-          '__snapshots__',
-        ],
-        excludedComponentPaths: ['/__test__/'],
-        foldersWithComponentFiles: ['components', 'containers'],
-        storiesFolderPath: './stories',
-      };
-      DocumentationCoverage.generateReport(defaultConfig);
-    }
+
+    DocumentationCoverage.generateReport(
+      config ? merge(defaultConfig, config) : defaultConfig
+    );
   }
 }
 DocumentationCoverageCli.exec();
