@@ -9,7 +9,7 @@ const DocumentationCoverage = require('./lib/index');
 
 
 const defaultConfig = {
-  source: './lib', // './src',
+  source: './src',
   excludedPaths: [
     '/assets/',
     '/components/',
@@ -24,7 +24,7 @@ const defaultConfig = {
 };
 
 
-const merge = deepmerge()
+const merge = deepmerge({all: true})
 
 
 class DocumentationCoverageCli {
@@ -70,7 +70,7 @@ class DocumentationCoverageCli {
     return config;
   }
 
-  static exec() {
+  static exec(source) {
     let config;
     const configPath = this.findConfigFilePath();
     if (configPath) {
@@ -78,8 +78,8 @@ class DocumentationCoverageCli {
     }
 
     DocumentationCoverage.generateReport(
-      config ? merge(defaultConfig, config) : defaultConfig
+      merge(defaultConfig, config ?? {}, source ? {source} : {})
     );
   }
 }
-DocumentationCoverageCli.exec();
+DocumentationCoverageCli.exec(process.argv[2]);
