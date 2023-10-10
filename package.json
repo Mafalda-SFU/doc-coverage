@@ -1,5 +1,5 @@
 {
-  "name": "@mohalla-tech/doc-coverage",
+  "name": "@mafalda-sfu/doc-coverage",
   "version": "1.1.4",
   "description": "custom scripts for web",
   "main": "lib/index.js",
