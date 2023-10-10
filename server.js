@@ -17,8 +17,9 @@ const defaultConfig = {
     '/__test__/',
     '/config./',
     '__snapshots__',
+    '/node_modules/'
   ],
-  excludedComponentPaths: ['/__test__/'],
+  excludedComponentPaths: ['/__test__/', '/node_modules/'],
   foldersWithComponentFiles: ['components', 'containers'],
   storiesFolderPath: './stories',
 };
