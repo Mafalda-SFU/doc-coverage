@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
+const {readFileSync} = require('fs');
 const path = require('path');
 
 const deepmerge = require('@fastify/deepmerge')
-const fs = require('fs-extra');
 
 const DocumentationCoverage = require('./lib/index');
 
@@ -36,7 +36,7 @@ class DocumentationCoverageCli {
   static findConfigFilePath() {
     try {
       const filePath = path.resolve('./.doccoverage.json');
-      fs.readFileSync(filePath);
+      readFileSync(filePath);
       return filePath;
     } catch (e) {
       // ignore
@@ -44,7 +44,7 @@ class DocumentationCoverageCli {
 
     try {
       const filePath = path.resolve('./.doccoverage.js');
-      fs.readFileSync(filePath);
+      readFileSync(filePath);
       return filePath;
     } catch (e) {
       // ignore
@@ -66,7 +66,7 @@ class DocumentationCoverageCli {
       // eslint-disable-next-line import/no-dynamic-require
       return require(configFilePath);
     }
-    const configJSON = fs.readFileSync(configFilePath, { encode: 'utf8' });
+    const configJSON = readFileSync(configFilePath, { encode: 'utf8' });
     const config = JSON.parse(configJSON);
     return config;
   }
