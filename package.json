@@ -4,6 +4,8 @@
   "description": "custom scripts for web",
   "main": "lib/index.js",
   "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
